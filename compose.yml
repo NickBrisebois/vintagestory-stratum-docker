@@ -1,0 +1,18 @@
+services:
+  vintagestory:
+    container_name: vintagestory
+    image: 
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      - SERVER_PASSWORD=password
+      - SERVER_PUBLIC=false
+      - GID=1000
+      - ID=1000
+    volumes:
+      - ./data:/data/vintage:rw
+      - ./Mods:/data/vintage/Mods:rw
+      - ./Saves:/data/vintage/Saves:rw
