@@ -5,8 +5,8 @@
 if [ "$(id -u vintagestory)" -ne "$UID" ]; then usermod -o -u "$UID" vintagestory ; fi
 if [ "$(id -g vintagestory)" -ne "$GID" ]; then groupmod -o -g "$GID" vintagestory ; fi
 
-VERSION_FILE="/data/server-file/.version"
-SERVER_DLL="/data/VintagestoryServer.dll"
+VERSION_FILE="/data/vintage/.version"
+SERVER_DLL="/data/StratumServer"
 SERVER_CONFIG="/data/vintage/serverconfig.json"
 
 # Seed the config from the baked-in default the first time (nothing to edit otherwise).
@@ -182,8 +182,8 @@ chown -R vintagestory:vintagestory /data
 # Start server
 echo "Launching server..."
 cd /data
-exec su vintagestory -s /bin/sh -p -c '
-  mkfifo /tmp/vsserver-log;
+exec su vintagestory -s /bin/sh -p -c "
+  [ -p /tmp/vsserver-log ] || mkfifo /tmp/vsserver-log
   cat /tmp/vsserver-log &
-  screen -DmS vsserver script -f -q -c "chmod +x StratumServer; ./StratumServer --dataPath /data/vintage" /tmp/vsserver-log
-'
+  screen -DmS vsserver script -f -q -c 'chmod +x ${SERVER_DLL}; ${SERVER_DLL} --dataPath /data/vintage' /tmp/vsserver-log
+"
