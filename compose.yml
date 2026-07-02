@@ -7,11 +7,6 @@ services:
     stdin_open: true
     tty: true
     environment:
-      SERVER_PASSWORD: pASsW0rd123
-      SERVER_PUBLIC: false
-      GID: 1001
-      ID: 1001
-
       # --- Gameplay ---
       WORLDCONFIG_GAMEMODE: "survival"
       WORLDCONFIG_PLAYERLIVES: "-1"
