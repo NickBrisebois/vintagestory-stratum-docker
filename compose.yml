@@ -1,18 +1,97 @@
 services:
-  vintagestory:
-    container_name: vintagestory
-    image: 
+  stratum-server:
+    container_name: stratum-server
+    build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     stdin_open: true
     tty: true
     environment:
-      - SERVER_PASSWORD=password
-      - SERVER_PUBLIC=false
-      - GID=1000
-      - ID=1000
+      SERVER_PASSWORD: pASsW0rd123
+      SERVER_PUBLIC: false
+      GID: 1001
+      ID: 1001
+
+      # --- Gameplay ---
+      WORLDCONFIG_GAMEMODE: "survival"
+      WORLDCONFIG_PLAYERLIVES: "-1"
+      WORLDCONFIG_STARTING_CLIMATE: "hot"
+      WORLDCONFIG_SPAWN_RADIUS: "50"
+      WORLDCONFIG_GRACE_TIMER: "0"
+      WORLDCONFIG_DEATH_PUNISHMENT: "keep"
+      WORLDCONFIG_DROPPED_ITEMS_TIMER: "600"
+      WORLDCONFIG_SEASONS: "enabled"
+      WORLDCONFIG_DAYS_PER_MONTH: "9"
+      WORLDCONFIG_HARSH_WINTERS: "true"
+      WORLDCONFIG_BLOCK_GRAVITY: "sandgravel"
+      WORLDCONFIG_CAVE_INS: "on"
+      WORLDCONFIG_LIGHTNING_FIRES: "true"
+      WORLDCONFIG_ALLOW_UNDERGROUND_FARMING: "false"
+      WORLDCONFIG_NO_LIQUID_SOURCE_TRANSPORT: "false"
+
+      # --- Player ---
+      WORLDCONFIG_PLAYER_HEALTH_POINTS: "15"
+      WORLDCONFIG_PLAYER_HEALTH_REGEN_SPEED: "1"
+      WORLDCONFIG_PLAYER_HUNGER_SPEED: "0.5"
+      WORLDCONFIG_LUNG_CAPACITY: "40000"
+      WORLDCONFIG_BODY_TEMPERATURE_RESISTANCE: "0"
+      WORLDCONFIG_PLAYER_MOVE_SPEED: "1.5"
+
+      # --- Creatures ---
+      WORLDCONFIG_CREATURE_HOSTILITY: "aggressive"
+      WORLDCONFIG_CREATURE_STRENGTH: "1"
+      WORLDCONFIG_CREATURE_SWIM_SPEED: "2"
+
+      # --- Rates / balance ---
+      WORLDCONFIG_FOOD_SPOIL_SPEED: "1"
+      WORLDCONFIG_SAPLING_GROWTH_RATE: "1"
+      WORLDCONFIG_TOOL_DURABILITY: "1"
+      WORLDCONFIG_TOOL_MINING_SPEED: "1"
+      WORLDCONFIG_PROPICK_NODE_SEARCH_RADIUS: "6"
+      WORLDCONFIG_MICROBLOCK_CHISELING: "stonewood"
+
+      # --- HUD / map / lore ---
+      WORLDCONFIG_ALLOW_COORDINATE_HUD: "true"
+      WORLDCONFIG_ALLOW_MAP: "true"
+      WORLDCONFIG_COLOR_ACCURATE_WORLDMAP: "true"
+      WORLDCONFIG_LORE_CONTENT: "true"
+      WORLDCONFIG_CLUTTER_OBTAINABLE: "ifrepaired"
+
+      # --- Temporal ---
+      WORLDCONFIG_TEMPORAL_STABILITY: "true"
+      WORLDCONFIG_TEMPORAL_STORMS: "off"
+      WORLDCONFIG_TEMPSTORM_DURATION_MUL: "1"
+      WORLDCONFIG_TEMPORAL_RIFTS: "visible"
+      WORLDCONFIG_TEMPORAL_GEAR_RESPAWN_USES: "20"
+      WORLDCONFIG_TEMPORAL_STORM_SLEEPING: "1"
+
+      # --- World generation ---
+      WORLDCONFIG_WORLD_CLIMATE: "realistic"
+      WORLDCONFIG_LANDCOVER: "0.6"
+      WORLDCONFIG_OCEANSCALE: "5"
+      WORLDCONFIG_UPHEAVEL_COMMONNESS: "0.3"
+      WORLDCONFIG_GEOLOGIC_ACTIVITY: "0.05"
+      WORLDCONFIG_LANDFORM_SCALE: "1.4"
+      WORLDCONFIG_WORLD_WIDTH: "1024000"
+      WORLDCONFIG_WORLD_LENGTH: "1024000"
+      WORLDCONFIG_WORLD_EDGE: "traversable"
+      WORLDCONFIG_POLAR_EQUATOR_DISTANCE: "100000"
+      WORLDCONFIG_GLOBAL_TEMPERATURE: "1"
+      WORLDCONFIG_GLOBAL_PRECIPITATION: "1"
+      WORLDCONFIG_GLOBAL_FORESTATION: "0"
+      WORLDCONFIG_GLOBAL_DEPOSIT_SPAWN_RATE: "1.2"
+      WORLDCONFIG_SURFACE_COPPER_DEPOSITS: "0.2"
+      WORLDCONFIG_SURFACE_TIN_DEPOSITS: "0.014"
+      WORLDCONFIG_SNOW_ACCUM: "true"
+
+      # --- Systems ---
+      WORLDCONFIG_ALLOW_LAND_CLAIMING: "true"
+      WORLDCONFIG_CLASS_EXCLUSIVE_RECIPES: "true"
+      WORLDCONFIG_AUCTION_HOUSE: "true"
+    ports:
+      - "42420:42420"
     volumes:
-      - ./data:/data/vintage:rw
-      - ./Mods:/data/vintage/Mods:rw
-      - ./Saves:/data/vintage/Saves:rw
+      - ./data:/data/vintage
+      # - ./Mods:/data/vintage/Mods  # optional
+      # - ./ModConfig:/data/vintage/ModConfig  # optional
+      # - ./Logs:/data/vintage/Logs  # optional
