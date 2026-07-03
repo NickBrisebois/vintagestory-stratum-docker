@@ -1,7 +1,8 @@
 FROM debian:12-slim AS setup
 
-ENV STRATUM_RELEASE_SHA256="sha256:3592d3037dd6b205d8136b70c6d98db7baa3dd4eed5137aa487e920b51246d8c" \
-    STRATUM_RELEASE_URI="https://github.com/StratumServer/Stratum/releases/download/v1.22.3-stratum.12/stratum-1.22.3-stratum.12-linux-x64.zip"
+ENV STRATUM_RELEASE="14"
+ENV STRATUM_RELEASE_SHA256="sha256:35e981eaaf4dee68fa78352503945b0b1bf1757956099f0f15576974a521ee81" \
+    STRATUM_RELEASE_URI="https://github.com/StratumServer/Stratum/releases/download/v1.22.3-stratum.${STRATUM_RELEASE}/stratum-1.22.3-stratum.${STRATUM_RELEASE}-linux-x64.zip"
 
 RUN set -eux; \
     apt-get update; \
